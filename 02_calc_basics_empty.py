@@ -8,13 +8,11 @@ Vyžádej si na vstupu 2 čísla, proveď s nima základní operace, na výstupu
 *** GUI tkinter
 """
 
-# import knihoven je zvykem definovat na začátku
-import os
 import csv
 import tkinter as tk
 from tkinter import *
 
-FIELDS = [
+CSV_FIELDS = [
     "first_number",
     "second_number",
     "added_together",
@@ -47,21 +45,21 @@ def calculate_and_save(first_number, second_number):
         filename = "./data/results.csv"
 
         # append to the csv file
-        with open(filename, "a", newline='') as csvfile:
-            csvwriter = csv.writer(csvfile)
-            csvwriter.writerow(rows)
+        with open(filename, "a", newline='') as csv_file:
+            csv_writer = csv.writer(csv_file)
+            csv_writer.writerow(rows)
 
     except ValueError:  # user input validation
         error_label.config(text="SYNTAX ERROR! Please insert valid numbers.")
     except ZeroDivisionError:
         error_label.config(text="MATH ERROR! Can't divide by zero.")
     except FileNotFoundError:  # if we can't find the csv file => create one
-        with open(filename, "w", newline='') as csvfile:
-            csvwriter = csv.writer(csvfile)
-            csvwriter.writerow(FIELDS)
-            csvwriter.writerow(rows)
+        with open(filename, "w", newline='') as csv_file:
+            csv_writer = csv.writer(csv_file)
+            csv_writer.writerow(CSV_FIELDS)
+            csv_writer.writerow(rows)
 
-# GUI setup
+# GUI
 master = tk.Tk()
 master.title("Simple Calculator")
 master.minsize(720, 300)
