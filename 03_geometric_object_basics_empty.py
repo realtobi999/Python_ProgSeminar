@@ -97,12 +97,10 @@ def display_triangle_properties(triangle: Triangle) -> None:
     s = circumference / 2
 
     # calculate area: √s(s−a)(s−b)(s−c) where s: (a + b + c)/2
-    area = math.sqrt(s * (s - triangle.ordinate_1) *
-                     (s - triangle.ordinate_2) * (s - triangle.hypotenuse))
+    area = math.sqrt(s * (s - triangle.ordinate_1) * (s - triangle.ordinate_2) * (s - triangle.hypotenuse))
 
     # calculate circumradius: abc/4S where S: area of the triangle
-    circumscribe_r = (triangle.ordinate_1 *
-                      triangle.ordinate_2 * triangle.hypotenuse) / (4 * area)
+    circumscribe_r = (triangle.ordinate_1 * triangle.ordinate_2 * triangle.hypotenuse) / (4 * area)
 
     # calculate inradius: S / s where S: area of the triangle; s: (a + b + c)/2
     inscribed_r = area / s
@@ -148,8 +146,7 @@ def display_triangle_type(triangle: Triangle) -> None:
 def main():
     while True:
         triangle = get_triangle_from_user()  # get triangle lengths from user
-        calculate_triangle_angles(
-            triangle)  # calculate the angles of the triangle
+        calculate_triangle_angles(triangle)  # calculate the angles of the triangle
 
         if is_valid_triangle(triangle):  # validate the triangle
             break
