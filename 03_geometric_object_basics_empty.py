@@ -34,7 +34,7 @@ def get_triangle_from_user() -> Triangle:
 
             break
         except ValueError:
-            print("ERROR! Please enter a valid number")
+            print("ERROR! Please enter a valid number.")
 
             triangle_sides.clear()
 
@@ -50,12 +50,16 @@ def get_triangle_from_user() -> Triangle:
 def is_valid_triangle(triangle: Triangle) -> bool:
     """
     Checks if the given triangle satisfies the triangle inequality theorem,
-    ensuring it can be formed with the provided side lengths.
+    ensuring it can be formed with the provided side lengths. (lengths also cannot be negative)
     Additionally, it checks if the sum of the triangle's angles equals 180 degrees.
 
     Returns:
         bool: True if the triangle is valid, False otherwise (with an error message).
     """
+
+    if (triangle.ordinate_1 <= 0 or triangle.ordinate_2 <= 0 or triangle.hypotenuse <= 0):
+        print("ERROR! Not a valid triangle due to side lengths: side lengths cannot be less than or zero.")
+        return False
 
     if (triangle.ordinate_1 + triangle.ordinate_2 <= triangle.hypotenuse
             or triangle.ordinate_1 + triangle.hypotenuse <= triangle.ordinate_2
