@@ -67,11 +67,6 @@ def is_valid_triangle(triangle: Triangle) -> bool:
         print("ERROR! Not a valid triangle due to side lengths.")
         return False
 
-    total_angle_sum = triangle.c_angle + triangle.b_angle + triangle.a_angle
-    if round(total_angle_sum) != 180:  # rounding to avoid floating-point precision issues
-        print(f"ERROR! Not a valid triangle due to angles: total is {total_angle_sum}° instead of 180°.")
-        return False
-
     return True
 
 
@@ -138,7 +133,7 @@ def display_triangle_type(triangle: Triangle) -> None:
     # determine triangle type based on angles
     if triangle.c_angle == 90 or triangle.b_angle == 90 or triangle.a_angle == 90:
         type_based_on_angles = "Pravoúhlý"
-    elif triangle.hypotenuse_angle > 90 or triangle.ordinate_1_angle > 90 or triangle.side_b_angle > 90:
+    elif triangle.c_angle > 90 or triangle.a_angle > 90 or triangle.b_angle > 90:
         type_based_on_angles = "Tupoúhlý"
     else:
         type_based_on_angles = "Ostroúhlý"
@@ -151,15 +146,26 @@ def display_triangle_type(triangle: Triangle) -> None:
 
 def main():
     while True:
-        triangle = get_triangle_from_user()  # get triangle lengths from user
-        calculate_triangle_angles(triangle)  # calculate the angles of the triangle
+        while True:
+            triangle = get_triangle_from_user()  # get triangle lengths from user
 
-        if is_valid_triangle(triangle):  # validate the triangle
-            break
+            if is_valid_triangle(triangle):  # validate the triangle
+                calculate_triangle_angles(triangle)  # calculate the angles of the triangle
+                break
 
-    # display properties and triangle type
-    display_triangle_properties(triangle)
-    display_triangle_type(triangle)
+        # display properties and triangle type
+        display_triangle_properties(triangle)
+        display_triangle_type(triangle)
+
+        continue_char = input("Chcete pokračovat? Y, X: ")
+
+        if continue_char.capitalize() == 'Y':
+            continue
+        elif continue_char.capitalize() == 'X':
+            exit(0)
+        else:
+            print("ERROR! Invalid key input.")
+            exit(1)
 
 
 if __name__ == "__main__":
