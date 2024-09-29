@@ -5,23 +5,23 @@ import math
 @dataclass
 class Triangle:
     # lengths of the sides
-    hypotenuse: float
-    ordinate_1: float
-    ordinate_2: float
+    side_c: float
+    side_a: float
+    side_b: float
 
     # angles (in degrees)
-    hypotenuse_angle: float = 0.00
-    ordinate_1_angle: float = 0.00
-    ordinate_2_angle: float = 0.00
+    c_angle: float = 0.00
+    a_angle: float = 0.00
+    b_angle: float = 0.00
 
 
 def get_triangle_from_user() -> Triangle:
     """
     Prompts the user to input three sides of a triangle, validates the input,
-    and returns the sides as a Triangle object with the longest side as the hypotenuse.
+    and returns the sides as a Triangle object with the longest side as the side_c.
 
     Returns:
-        Triangle: A Triangle object with sorted side lengths (hypotenuse, ordinate_1, ordinate_2).
+        Triangle: A Triangle object with sorted side lengths (side_c, side_a, side_b).
     """
 
     triangle_sides = []
@@ -41,9 +41,9 @@ def get_triangle_from_user() -> Triangle:
     triangle_sides.sort(reverse=True)
 
     return Triangle(
-        hypotenuse=triangle_sides[0],
-        ordinate_1=triangle_sides[1],
-        ordinate_2=triangle_sides[2],
+        side_c=triangle_sides[0],
+        side_a=triangle_sides[1],
+        side_b=triangle_sides[2],
     )
 
 
@@ -57,17 +57,17 @@ def is_valid_triangle(triangle: Triangle) -> bool:
         bool: True if the triangle is valid, False otherwise (with an error message).
     """
 
-    if (triangle.ordinate_1 <= 0 or triangle.ordinate_2 <= 0 or triangle.hypotenuse <= 0):
+    if (triangle.side_a <= 0 or triangle.side_b <= 0 or triangle.side_c <= 0):
         print("ERROR! Not a valid triangle due to side lengths: side lengths cannot be less than or zero.")
         return False
 
-    if (triangle.ordinate_1 + triangle.ordinate_2 <= triangle.hypotenuse
-            or triangle.ordinate_1 + triangle.hypotenuse <= triangle.ordinate_2
-            or triangle.ordinate_2 + triangle.hypotenuse <= triangle.ordinate_1):
+    if (triangle.side_a + triangle.side_b <= triangle.side_c
+            or triangle.side_a + triangle.side_c <= triangle.side_b
+            or triangle.side_b + triangle.side_c <= triangle.side_a):
         print("ERROR! Not a valid triangle due to side lengths.")
         return False
 
-    total_angle_sum = triangle.hypotenuse_angle + triangle.ordinate_1_angle + triangle.ordinate_2_angle
+    total_angle_sum = triangle.c_angle + triangle.b_angle + triangle.a_angle
     if round(total_angle_sum) != 180:  # rounding to avoid floating-point precision issues
         print(f"ERROR! Not a valid triangle due to angles: total is {total_angle_sum}° instead of 180°.")
         return False
@@ -77,17 +77,19 @@ def is_valid_triangle(triangle: Triangle) -> bool:
 
 def calculate_triangle_angles(triangle: Triangle) -> Triangle:
     """
-    Calculates the angles of a triangle based on the side lengths using trigonometric functions.
+    Calculates the angles of a triangle based on the side lengths using the cosine rule.
 
     Returns:
-        Triangle: The Triangle object with updated angles (ordinate_1_angle, ordinate_2_angle, hypotenuse_angle).
+        Triangle: The Triangle object with updated angles (a_angle, b_angle, c_angle).
     """
 
-    triangle.ordinate_1_angle = math.degrees(math.asin(triangle.ordinate_2 / triangle.hypotenuse))
-    triangle.ordinate_2_angle = math.degrees(math.asin(triangle.ordinate_1 / triangle.hypotenuse))
-    triangle.hypotenuse_angle = 180 - (triangle.ordinate_1_angle + triangle.ordinate_2_angle)
+    # Using cosine rule to calculate the angles
+    triangle.a_angle = math.degrees(math.acos((triangle.side_b ** 2 + triangle.side_c ** 2 - triangle.side_a ** 2) / (2 * triangle.side_b * triangle.side_c)))
+    triangle.b_angle = math.degrees(math.acos((triangle.side_a ** 2 + triangle.side_c ** 2 - triangle.side_b ** 2) / (2 * triangle.side_a * triangle.side_c)))
+    triangle.c_angle = 180 - (triangle.a_angle + triangle.b_angle)
 
     return triangle
+
 
 
 def display_triangle_properties(triangle: Triangle) -> None:
@@ -95,24 +97,24 @@ def display_triangle_properties(triangle: Triangle) -> None:
     Calculates circumference, area, circumradius and inradius of the triangle.
     """
 
-    circumference = triangle.hypotenuse + triangle.ordinate_1 + triangle.ordinate_2
+    circumference = triangle.side_c + triangle.side_a + triangle.side_b
 
     # calculate semi-perimeter
     s = circumference / 2
 
     # calculate area: √s(s−a)(s−b)(s−c) where s: (a + b + c)/2
-    area = math.sqrt(s * (s - triangle.ordinate_1) * (s - triangle.ordinate_2) * (s - triangle.hypotenuse))
+    area = math.sqrt(s * (s - triangle.side_a) * (s - triangle.side_b) * (s - triangle.side_c))
 
     # calculate circumradius: abc/4S where S: area of the triangle
-    circumscribe_r = (triangle.ordinate_1 * triangle.ordinate_2 * triangle.hypotenuse) / (4 * area)
+    circumscribe_r = (triangle.side_a * triangle.side_b * triangle.side_c) / (4 * area)
 
     # calculate inradius: S / s where S: area of the triangle; s: (a + b + c)/2
     inscribed_r = area / s
 
     print("\n---------------------------------------")
-    print(f"[*] Odvěsna 1:\t{triangle.ordinate_1}\tÚhel: {triangle.ordinate_1_angle:.2f}")
-    print(f"[*] Odvěsna 2:\t{triangle.ordinate_2}\tÚhel: {triangle.ordinate_2_angle:.2f}")
-    print(f"[*] Hypotenuse:\t{triangle.hypotenuse}\tÚhel: {triangle.hypotenuse_angle:.2f}\n")
+    print(f"[*] Strana a:\t{triangle.side_a}\tÚhel: {triangle.a_angle:.2f}")
+    print(f"[*] Strana b:\t{triangle.side_b}\tÚhel: {triangle.b_angle:.2f}")
+    print(f"[*] Strana c:\t{triangle.side_c}\tÚhel: {triangle.c_angle:.2f}\n")
     print(f"[*] Obvod:\t\t{circumference}")
     print(f"[*] Obsah:\t\t{area:.2f}")
     print(f"[*] Kruž. Opsaná:\t{circumscribe_r:.2f}")
@@ -126,17 +128,17 @@ def display_triangle_type(triangle: Triangle) -> None:
     """
 
     # determine triangle type based on side lengths
-    if triangle.ordinate_1 == triangle.ordinate_2 == triangle.hypotenuse:
+    if triangle.side_a == triangle.side_b == triangle.side_c:
         type_based_on_lengths = "Rovnostranný"
-    elif triangle.ordinate_1 == triangle.ordinate_2 or triangle.ordinate_1 == triangle.hypotenuse or triangle.ordinate_2 == triangle.hypotenuse:
+    elif triangle.side_a == triangle.side_b or triangle.side_a == triangle.side_c or triangle.side_b == triangle.side_c:
         type_based_on_lengths = "Rovnoramenný"
     else:
         type_based_on_lengths = "Různostranný"
 
     # determine triangle type based on angles
-    if triangle.hypotenuse_angle == 90:
+    if triangle.c_angle == 90 or triangle.b_angle == 90 or triangle.a_angle == 90:
         type_based_on_angles = "Pravoúhlý"
-    elif triangle.hypotenuse_angle > 90 or triangle.ordinate_1_angle > 90 or triangle.ordinate_2_angle > 90:
+    elif triangle.hypotenuse_angle > 90 or triangle.ordinate_1_angle > 90 or triangle.side_b_angle > 90:
         type_based_on_angles = "Tupoúhlý"
     else:
         type_based_on_angles = "Ostroúhlý"
