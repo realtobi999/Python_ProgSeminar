@@ -10,33 +10,46 @@ os.system("clear")
 
 
 def print_task_name(name: str):
+    """
+    Prints the task name in a bold green format.
+
+    :param name: The name of the task to display.
+    """
     print(f"\n\033[1;32m{name} \033[0m\n")
 
+
 def print_error(error: str):
+    """
+    Prints an error message in a bold red format.
+
+    :param error: The error message to display.
+    """
     print(f"\n\033[1;31m{error} \033[0m\n")
 
-def get_number_from_user(input_text: str = "Vložte číslo: ", error_message: str = "Špatný vstup, zkuste znova!", conditions: list = None) -> float:
+
+def get_number_from_user(input_text: str = "Vložte číslo: ", 
+                         error_message: str = "Špatný vstup, zkuste znova!", 
+                         conditions: list = None) -> float:
+    """
+    Prompts the user for a number input and validates it against optional conditions.
+
+    :param input_text: The prompt text to display when asking for input (default is in Czech: "Vložte číslo").
+    :param error_message: The error message to display in case of invalid input (default is in Czech: "Špatný vstup, zkuste znova!").
+    :param conditions: A list of boolean conditions to validate the number against. If any condition fails, the error message is shown.
+    :return: The valid number entered by the user.
+    """
     while True:
         try:
             number = float(input(input_text))
 
-            if conditions:
-                valid = True
-                
-                for condition in conditions:
-                    if not condition(number):
-                        print_error(error_message)
-                        valid = False
-                        break;
-
-                if (valid is False):
-                    continue
+            if conditions and not all(condition(number) for condition in conditions):
+                print_error(error_message)
+                continue
 
             return number
         except ValueError:
             print_error(error_message)
 
-            continue
 
 
 ##############################################################
@@ -176,7 +189,7 @@ print_task_name("8. Úkol: Vytváření seznamů a indexování")
 my_list = []
 
 for i in range(1, 6):
-    my_list.append(get_number_from_user(input_text=f"Vložte {i}. Prvek: "))
+    my_list.append(get_number_from_user(input_text=f"Vložte {i}. číselný prvek: "))
 
 # b) Třetí prvek
 print(f"Třetí prvek: {my_list[2]}")
@@ -196,7 +209,7 @@ print_task_name("9. Úkol: Základní metody seznamu")
 my_list = []
 
 for i in range(1, 4):
-    my_list.append(get_number_from_user(input_text=f"Vložte {i}. Prvek: "))
+    my_list.append(get_number_from_user(input_text=f"Vložte {i}. číselný prvek: "))
 
 
 # b) Odstranění prvku na zvoleném indexu
@@ -220,9 +233,9 @@ print(f"Seřazený list: {my_list}")
 print_task_name("10. Úkol: Vytvoření tuple a indexování")
 
 # a) Vytvoření tuple
-number_1 = get_number_from_user(input_text="Vložte 1. prvek: ")
-number_2 = get_number_from_user(input_text="Vložte 2. prvek: ")
-number_3 = get_number_from_user(input_text="Vložte 3. prvek: ")
+number_1 = get_number_from_user(input_text="Vložte 1. číselný prvek: ")
+number_2 = get_number_from_user(input_text="Vložte 2. číselný prvek: ")
+number_3 = get_number_from_user(input_text="Vložte 3. číselný prvek: ")
 
 my_tuple = (number_1, number_2, number_3)
 
@@ -246,7 +259,7 @@ my_tuple = (1,2,3,2,4,2,5)
 number_to_count = int(get_number_from_user(input_text="Zadejte prvek: "))
 print(f"Prvek se objevuje v tuplu: {my_tuple.count(number_to_count)}x")
 # b) Použití metody index()
-number_to_index = int(get_number_from_user(input_text="Zadejte prvek: "))
+number_to_index = int(get_number_from_user(input_text="Zadejte prvek: ", conditions=[lambda n: n >= 1 and n <= 5]))
 print(f"Index tohoto prvku v tuplu: {my_tuple.index(number_to_index)}")
 
 ##############################################################
@@ -260,7 +273,11 @@ print_task_name("12. Úkol: Němennost tuple")
 my_tuple = (1,2,3,2,4,2,5)
 
 # b) Pokus o změnu prvku
-my_tuple[0] = 0
+try:
+    my_tuple[0] = 0
+except TypeError as e:
+    print_error(f"An error occurred: {e}")
+
 
 ##############################################################
 
