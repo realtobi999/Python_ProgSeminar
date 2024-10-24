@@ -1,23 +1,24 @@
 import os
 
-ENG_ALPHABET = [
-    list("AÁBCČDĎEÉĚFGHIÍJKLMNŇOÓPQRŘSŠTŤUÚŮVWXYÝZŽ"),
-    list("aábcčdďeéěfghiíjklmnňoópqrřsštťuúůvwxyýzž.!,"),
-]
+ENG_ALPHABET = "aábcčdďeéěfghiíjklmnňoópqrřsštťuúůvwxyýzž.!,AÁBCČDĎEÉĚFGHIÍJKLMNŇOÓPQRŘSŠTŤUÚŮVWXYÝZŽ"
+# Anglická abeceda s českými znaky
 
+def caesar_cipher_encrypt(text: str, shift: int, alphabet: str) -> str:
+    """
+    Encrypts a given text using Caesar cipher by shifting characters in the alphabet.
 
-def caesar_cipher_encrypt(text: str, shift: int) -> str:
+    :param text: The text to encrypt.
+    :param shift: The number of positions to shift each character in the alphabet.
+    :param alphabet: The alphabet to use for encryption.
+    :return: The encrypted text.
+    """
     encrypted_text = ""
+    alphabet = list(alphabet)
 
     for char in text:
         if char == " ":
             encrypted_text += " "
             continue
-
-        if char.isupper():
-            alphabet = ENG_ALPHABET[0]
-        else:
-            alphabet = ENG_ALPHABET[1]
 
         index_to_add = alphabet.index(char) + shift
 
@@ -29,25 +30,33 @@ def caesar_cipher_encrypt(text: str, shift: int) -> str:
     return encrypted_text
 
 
-def caesar_cipher_decrypt(encrypted_text: str, shift: int) -> str:
+def caesar_cipher_decrypt(encrypted_text: str, shift: int, alphabet: str) -> str:
+    """
+    Decrypts a given encrypted text that was ciphered using Caesar cipher.
+
+    :param encrypted_text: The encrypted text to decrypt.
+    :param shift: The number of positions to shift back each character in the alphabet.
+    :param alphabet: The alphabet to use for decryption.
+    :return: The decrypted text.
+    """
     text = ""
+    alphabet = list(alphabet)
 
     for char in encrypted_text:
         if char == " ":
             text += " "
             continue
 
-        if char.isupper():
-            alphabet = ENG_ALPHABET[0]
-        else:
-            alphabet = ENG_ALPHABET[1]
-
-        index_to_add = alphabet.index(char) - shift
+        try:
+            index_to_add = alphabet.index(char) - shift
+        except ValueError:
+            text += char
+            continue
 
         if index_to_add < 0:
             index_to_add += len(alphabet)
 
-        text += alphabet[index_to_add]
+        text += alphabet[index_to_add % len(alphabet)]
 
     return text
 
@@ -55,8 +64,8 @@ def caesar_cipher_decrypt(encrypted_text: str, shift: int) -> str:
 if __name__ == "__main__":
     os.system("clear")
 
-    encrypted_text = caesar_cipher_encrypt("Tečna je přímka, která má s křivkou společný jeden bod a vzdálenost křivky od přímky klesá při přibližování se k bodu dotyku rychleji než lineárně!", 2)
+    encrypted_text = caesar_cipher_encrypt("Tečna je přímka, která má s křivkou společný jeden bod a vzdálenost křivky od přímky klesá při přibližování se k bodu dotyku rychleji než lineárně!", 2, ENG_ALPHABET)
     print(encrypted_text)
 
-    decrypted_text = caesar_cipher_decrypt(encrypted_text, 2)
+    decrypted_text = caesar_cipher_decrypt(encrypted_text, 2, ENG_ALPHABET)
     print(decrypted_text)
