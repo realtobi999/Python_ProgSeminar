@@ -1,5 +1,5 @@
 import os
-
+from utils import print_error, print_title
 
 def ascii_print_table(start: int, end: int) -> None:
     """
@@ -76,10 +76,16 @@ def ascii_convert(char: str, return_type: str) -> str:
 
 
 if __name__ == "__main__":
-    ascii_print_table(1, 127)
+    os.system("clear")
+    print_title("[*] 05 - Encryption/Decryption - ASCII\n")
 
-    char = "#"
-    print(f"Znak '{char}' -> ASCII: ", ord(char))
-    print(f"Znak '{char}' -> BIN: ", ascii_convert(char, "bin"))
-    print(f"Znak '{char}' -> OCT: ", ascii_convert(char, "oct"))
-    print(f"Znak '{char}' -> HEX: ", ascii_convert(char, "hex"))
+    try:
+        ascii_print_table(1, 127)
+
+        char = "#"
+        print(f"[*] Znak '{char}' -> ASCII: ", ord(char))
+        print(f"[*] Znak '{char}' -> BIN: ", ascii_convert(char, "bin"))
+        print(f"[*] Znak '{char}' -> OCT: ", ascii_convert(char, "oct"))
+        print(f"[*] Znak '{char}' -> HEX: ", ascii_convert(char, "hex"))
+    except ValueError as e:
+        print_error(e)

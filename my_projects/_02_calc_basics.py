@@ -1,13 +1,3 @@
-"""_summary_
-02) calc_basics.py
-
-Vyžádej si na vstupu 2 čísla, proveď s nima základní operace, na výstupu vždy zobraz operaci a výsledek.
-* ošetři dělení nulou
-* ošetři číselný vstup
-** ukládání výstupů do souboru
-*** GUI tkinter
-"""
-
 import csv
 import tkinter as tk
 from tkinter import *
@@ -21,6 +11,7 @@ CSV_FIELDS = [
     "divided",
 ]
 
+
 def calculate_and_save(first_number, second_number):
     try:
         first_number = float(first_number)
@@ -31,7 +22,9 @@ def calculate_and_save(first_number, second_number):
         multiplication = first_number * second_number
         division = first_number / second_number
 
-        result_label.config(text=f"Addition: {addition} Subtraction: {subtraction}\nMultiplication: {multiplication} Division: {division}")
+        result_label.config(
+            text=f"Addition: {addition} Subtraction: {subtraction}\nMultiplication: {multiplication} Division: {division}"
+        )
 
         rows = [
             first_number,
@@ -42,10 +35,10 @@ def calculate_and_save(first_number, second_number):
             division,
         ]
 
-        filename = "./data/results.csv"
+        filename = "./../data/results.csv"
 
         # append to the csv file
-        with open(filename, "a", newline='') as csv_file:
+        with open(filename, "a", newline="") as csv_file:
             csv_writer = csv.writer(csv_file)
             csv_writer.writerow(rows)
 
@@ -54,10 +47,11 @@ def calculate_and_save(first_number, second_number):
     except ZeroDivisionError:
         error_label.config(text="MATH ERROR! Can't divide by zero.")
     except FileNotFoundError:  # if we can't find the csv file => create one
-        with open(filename, "w", newline='') as csv_file:
+        with open(filename, "w", newline="") as csv_file:
             csv_writer = csv.writer(csv_file)
             csv_writer.writerow(CSV_FIELDS)
             csv_writer.writerow(rows)
+
 
 # GUI
 master = tk.Tk()
@@ -82,7 +76,11 @@ result_label.grid(row=2, column=0, columnspan=4, padx=10)
 tk.Button(
     master,
     text="Calculate",
-    command=lambda: [result_label.config(text=""), error_label.config(text=""), calculate_and_save(entry_first_number.get(), entry_second_number.get())]
+    command=lambda: [
+        result_label.config(text=""),
+        error_label.config(text=""),
+        calculate_and_save(entry_first_number.get(), entry_second_number.get()),
+    ],
 ).grid(row=4, column=0, columnspan=4, pady=20)
 
 master.mainloop()

@@ -1,5 +1,7 @@
-from dataclasses import dataclass
 import math
+import os
+from dataclasses import dataclass
+from utils import print_error, print_title, get_number_from_user
 
 
 @dataclass
@@ -26,17 +28,15 @@ def get_triangle_from_user() -> Triangle:
 
     triangle_sides = []
 
-    while True:
-        try:
-            triangle_sides.append(float(input("[*] Zadej první stranu: ")))
-            triangle_sides.append(float(input("[*] Zadej druhou stranu: ")))
-            triangle_sides.append(float(input("[*] Zadej třetí stranu: ")))
-
-            break
-        except ValueError:
-            print("ERROR! Please enter a valid number.")
-
-            triangle_sides.clear()
+    triangle_sides.append(
+        get_number_from_user("[*] Zadej první stranu: ", conditions=[lambda n: n > 0])
+    )
+    triangle_sides.append(
+        get_number_from_user("[*] Zadej druhou stranu: ", conditions=[lambda n: n > 0])
+    )
+    triangle_sides.append(
+        get_number_from_user("[*] Zadej třetí stranu: ", conditions=[lambda n: n > 0])
+    )
 
     triangle_sides.sort(reverse=True)
 
@@ -57,14 +57,18 @@ def is_valid_triangle(triangle: Triangle) -> bool:
         bool: True if the triangle is valid, False otherwise (with an error message).
     """
 
-    if (triangle.side_a <= 0 or triangle.side_b <= 0 or triangle.side_c <= 0):
-        print("ERROR! Not a valid triangle due to side lengths: side lengths cannot be less than or zero.")
+    if triangle.side_a <= 0 or triangle.side_b <= 0 or triangle.side_c <= 0:
+        print_error(
+            "ERROR! Not a valid triangle due to side lengths: side lengths cannot be less than or zero."
+        )
         return False
 
-    if (triangle.side_a + triangle.side_b <= triangle.side_c
-            or triangle.side_a + triangle.side_c <= triangle.side_b
-            or triangle.side_b + triangle.side_c <= triangle.side_a):
-        print("ERROR! Not a valid triangle due to side lengths.")
+    if (
+        triangle.side_a + triangle.side_b <= triangle.side_c
+        or triangle.side_a + triangle.side_c <= triangle.side_b
+        or triangle.side_b + triangle.side_c <= triangle.side_a
+    ):
+        print_error("ERROR! Not a valid triangle due to side lengths.")
         return False
 
     return True
@@ -79,12 +83,21 @@ def calculate_triangle_angles(triangle: Triangle) -> Triangle:
     """
 
     # Using cosine rule to calculate the angles
-    triangle.a_angle = math.degrees(math.acos((triangle.side_b ** 2 + triangle.side_c ** 2 - triangle.side_a ** 2) / (2 * triangle.side_b * triangle.side_c)))
-    triangle.b_angle = math.degrees(math.acos((triangle.side_a ** 2 + triangle.side_c ** 2 - triangle.side_b ** 2) / (2 * triangle.side_a * triangle.side_c)))
+    triangle.a_angle = math.degrees(
+        math.acos(
+            (triangle.side_b**2 + triangle.side_c**2 - triangle.side_a**2)
+            / (2 * triangle.side_b * triangle.side_c)
+        )
+    )
+    triangle.b_angle = math.degrees(
+        math.acos(
+            (triangle.side_a**2 + triangle.side_c**2 - triangle.side_b**2)
+            / (2 * triangle.side_a * triangle.side_c)
+        )
+    )
     triangle.c_angle = 180 - (triangle.a_angle + triangle.b_angle)
 
     return triangle
-
 
 
 def display_triangle_properties(triangle: Triangle) -> None:
@@ -98,7 +111,9 @@ def display_triangle_properties(triangle: Triangle) -> None:
     s = circumference / 2
 
     # calculate area: √s(s−a)(s−b)(s−c) where s: (a + b + c)/2
-    area = math.sqrt(s * (s - triangle.side_a) * (s - triangle.side_b) * (s - triangle.side_c))
+    area = math.sqrt(
+        s * (s - triangle.side_a) * (s - triangle.side_b) * (s - triangle.side_c)
+    )
 
     # calculate circumradius: abc/4S where S: area of the triangle
     circumscribe_r = (triangle.side_a * triangle.side_b * triangle.side_c) / (4 * area)
@@ -125,7 +140,11 @@ def display_triangle_type(triangle: Triangle) -> None:
     # determine triangle type based on side lengths
     if triangle.side_a == triangle.side_b == triangle.side_c:
         type_based_on_lengths = "Rovnostranný"
-    elif triangle.side_a == triangle.side_b or triangle.side_a == triangle.side_c or triangle.side_b == triangle.side_c:
+    elif (
+        triangle.side_a == triangle.side_b
+        or triangle.side_a == triangle.side_c
+        or triangle.side_b == triangle.side_c
+    ):
         type_based_on_lengths = "Rovnoramenný"
     else:
         type_based_on_lengths = "Různostranný"
@@ -150,23 +169,30 @@ def main():
             triangle = get_triangle_from_user()  # get triangle lengths from user
 
             if is_valid_triangle(triangle):  # validate the triangle
-                calculate_triangle_angles(triangle)  # calculate the angles of the triangle
+                calculate_triangle_angles(
+                    triangle
+                )  # calculate the angles of the triangle
                 break
 
         # display properties and triangle type
         display_triangle_properties(triangle)
         display_triangle_type(triangle)
 
-        continue_char = input("Chcete pokračovat? Y, X: ")
+        print_title("\n[*] Chcete pokračovat? Y, X: ")
+        continue_char = input("=> ")
 
-        if continue_char.capitalize() == 'Y':
+        if continue_char.capitalize() == "Y":
+            print()
             continue
-        elif continue_char.capitalize() == 'X':
+        elif continue_char.capitalize() == "X":
             exit(0)
         else:
-            print("ERROR! Invalid key input.")
+            print_error("ERROR! Invalid key input.")
             exit(1)
 
 
 if __name__ == "__main__":
+    os.system("clear")
+    print_title("[*] 03 - Geometric Object Basics\n")
+
     main()

@@ -1,4 +1,5 @@
 import os
+from utils import print_title
 
 ENG_ALPHABET = "aábcčdďeéěfghiíjklmnňoópqrřsštťuúůvwxyýzž.!,AÁBCČDĎEÉĚFGHIÍJKLMNŇOÓPQRŘSŠTŤUÚŮVWXYÝZŽ"
 # Anglická abeceda s českými znaky
@@ -64,8 +65,12 @@ def caesar_cipher_decrypt(encrypted_text: str, shift: int, alphabet: str) -> str
 if __name__ == "__main__":
     os.system("clear")
 
+    print_title("[*] 05 - Encryption/Decryption - Basics 01\n")
+
     encrypted_text = caesar_cipher_encrypt("Tečna je přímka, která má s křivkou společný jeden bod a vzdálenost křivky od přímky klesá při přibližování se k bodu dotyku rychleji než lineárně!", 2, ENG_ALPHABET)
+    print_title(f"[*] Encrypted: ")
     print(encrypted_text)
 
     decrypted_text = caesar_cipher_decrypt(encrypted_text, 2, ENG_ALPHABET)
+    print_title(f"[*] Decrypted: ")
     print(decrypted_text)

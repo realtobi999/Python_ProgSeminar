@@ -1,5 +1,6 @@
 import random
 import os
+from utils import get_number_from_user, print_error, print_title
 
 # Global constants and variables
 CORRECT_ANSWERS = 0
@@ -7,42 +8,6 @@ WRONG_ANSWERS = 0
 TOTAL_SOLVED = 0
 
 OPERATORS = ["-", "+", "*", "/"]
-
-# Clear the console
-os.system("clear")
-
-
-def print_error(error: str):
-    """
-    Prints an error message in bold red.
-
-    :param error: The error message to display.
-    """
-    print(f"\n\033[1;31m{error} \033[0m")
-
-
-def get_number_from_user(input_text: str = "Vložte číslo: ", 
-                         error_message: str = "Špatný vstup, zkuste znova!", 
-                         conditions: list = None) -> float:
-    """
-    Prompts the user for a number input and validates it against optional conditions.
-
-    :param input_text: The text to display when asking for input.
-    :param error_message: The message to display for invalid input.
-    :param conditions: A list of conditions (functions) to validate the input.
-    :return: The valid number entered by the user.
-    """
-    while True:
-        try:
-            number = float(input(input_text))
-
-            if conditions and not all(condition(number) for condition in conditions):
-                print_error(error_message)
-                continue
-
-            return number
-        except ValueError:
-            print_error(error_message)
 
 
 def update_globals(answer_is_correct: bool) -> None:
@@ -65,21 +30,21 @@ def display_globals() -> None:
     """
     Displays the global count of total solved problems, correct answers, and wrong answers.
     """
-    print(f"Total Solved: {TOTAL_SOLVED}")
-    print(f"Correct Answers : \033[92m{CORRECT_ANSWERS}\033[0m")
-    print(f"Wrong Answers : \033[91m{WRONG_ANSWERS}\033[0m")
+    print(f"[*] Total Solved: {TOTAL_SOLVED}")
+    print(f"[*] Correct Answers : \033[92m{CORRECT_ANSWERS}\033[0m")
+    print(f"[*] Wrong Answers : \033[91m{WRONG_ANSWERS}\033[0m")
 
 
 def simple_problem():
     """
-    Generates a simple arithmetic problem using two random numbers and a random operator. 
+    Generates a simple arithmetic problem using two random numbers and a random operator.
     Validates the user's answer and updates the global counts.
     """
     number_1 = float(random.randint(1, 10))
     number_2 = float(random.randint(1, 10))
     operator = random.choice(OPERATORS)
 
-    print(f"Jaký je výsledek {number_1:.0f} {operator} {number_2:.0f}?")
+    print(f"[*] Jaký je výsledek {number_1:.0f} {operator} {number_2:.0f}?")
 
     # calculate the correct result based on the operator
     if operator == "+":
@@ -95,10 +60,10 @@ def simple_problem():
 
     # check if the user's result matches the correct result
     if user_input_result == result:
-        print(f"\n\033[1;32mSprávně! \033[0m")
+        print_title("\nSprávně!\n")
         update_globals(answer_is_correct=True)
     else:
-        print_error("Nesprávný výsledek!")
+        print_error("\nNesprávný výsledek!\n")
         update_globals(answer_is_correct=False)
 
     display_globals()
@@ -134,16 +99,16 @@ def complex_problem(number_of_elements: int):
         else:
             problem += f"{operator} {number:.0f} "
 
-    print(f"Jaký je výsledek {problem}?")
+    print(f"[*] Jaký je výsledek {problem}?")
 
     user_input_result = get_number_from_user(input_text="=> ")
 
     # check if the user's result matches the correct result
     if user_input_result == result:
-        print(f"\n\033[1;32mSprávně! \033[0m")
+        print_title("\nSprávně!\n")
         update_globals(answer_is_correct=True)
     else:
-        print_error("Nesprávný výsledek!")
+        print_error("\nNesprávný výsledek!\n")
         update_globals(answer_is_correct=False)
 
     display_globals()
@@ -151,14 +116,17 @@ def complex_problem(number_of_elements: int):
 
 if __name__ == "__main__":
     random.seed()
+    os.system("clear")
 
-    print(f"\n\033[1;32mNahodné příklady generátor! \033[0m\n")
-    difficulty = input("Vyberte obtížnost: [1 - lehká, 2 - obtížná]: ")
+    print_title("[*] 04 - Random Numbers Basics\n")
+    difficulty = input("[*] Vyberte obtížnost: [1 - lehká, 2 - obtížná]: ")
     print()
 
     if difficulty == "2":
-        print("Kolik chcete čísel v příkladě? (min. 3)")
-        amount_of_numbers = int(get_number_from_user(input_text="=> ", conditions=[lambda n: n > 2]))
+        print("[*] Kolik chcete čísel v příkladě? (min. 3)")
+        amount_of_numbers = int(
+            get_number_from_user(input_text="=> ", conditions=[lambda n: n > 2])
+        )
         print()
 
     while True:
@@ -167,16 +135,16 @@ if __name__ == "__main__":
         elif difficulty == "2":
             complex_problem(amount_of_numbers)
         else:
-            print_error("Nesprávný input!")
+            print_error("ERROR! Invalid key input.")
 
-        print(f"\n\033[1;32mChcete pokračovat? [Y/N] \033[0m\n")
+        print_title("\n[*] Chcete pokračovat? Y, X: ")
+        continue_char = input("=> ")
 
-        user_exit_input = input().upper()
-
-        if user_exit_input == "Y":
+        if continue_char.capitalize() == "Y":
+            print()
             continue
-        elif user_exit_input == "N":
-            break
+        elif continue_char.capitalize() == "X":
+            exit(0)
         else:
-            print_error("Nesprávný input!")
-            break
+            print_error("ERROR! Invalid key input.")
+            exit(1)
