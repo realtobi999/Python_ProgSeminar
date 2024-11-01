@@ -5,10 +5,7 @@ VYPRACOVAL/A: Tobiáš Filgas
 """
 
 import os
-import sys
-from pathlib import Path
-sys.path.append(str(Path(__file__).resolve().parent.parent))
-from my_projects.utils import get_number_from_user, print_title, print_error
+from iridis import get_number_from_user, print_title, print_error
 
 
 os.system("clear")

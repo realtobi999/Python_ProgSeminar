@@ -1,5 +1,5 @@
 import os
-from utils import print_error, print_title
+from iridis import print_error, print_title
 
 def ascii_print_table(start: int, end: int) -> None:
     """

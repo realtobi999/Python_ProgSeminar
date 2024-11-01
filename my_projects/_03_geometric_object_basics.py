@@ -1,7 +1,7 @@
 import math
 import os
 from dataclasses import dataclass
-from utils import print_error, print_title, get_number_from_user
+from iridis import print_error, print_title, get_number_from_user
 
 
 @dataclass

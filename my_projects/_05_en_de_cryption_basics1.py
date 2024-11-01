@@ -1,5 +1,5 @@
 import os
-from utils import print_title
+from iridis import print_title
 
 ENG_ALPHABET = "aábcčdďeéěfghiíjklmnňoópqrřsštťuúůvwxyýzž.!,AÁBCČDĎEÉĚFGHIÍJKLMNŇOÓPQRŘSŠTŤUÚŮVWXYÝZŽ"
 # Anglická abeceda s českými znaky

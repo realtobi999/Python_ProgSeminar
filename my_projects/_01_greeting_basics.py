@@ -1,7 +1,7 @@
 import random
 import time
 import datetime
-from utils import print_title, print_error
+from iridis import print_title, print_error
 
 print_title("[*] 01 - Greeting Basics\n")
 

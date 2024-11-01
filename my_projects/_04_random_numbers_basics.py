@@ -1,6 +1,6 @@
 import random
 import os
-from utils import get_number_from_user, print_error, print_title
+from iridis import get_number_from_user, print_error, print_title
 
 # Global constants and variables
 CORRECT_ANSWERS = 0

@@ -2,7 +2,7 @@ import os
 import hashlib
 import csv
 
-from utils import print_title, print_error, get_number_from_user
+from iridis import print_title, print_error, get_number_from_user
 
 
 # Global constants and variables
