@@ -1,8 +1,4 @@
 """
-* Napište funkci, která vypočítá faktoriál čísla pomocí smyčky for, iterace.
-* Napište funkci, která vypočítá faktoriál čísla pomocí rekurze.
-* Upravte předchozí funkci tak, aby ošetřovala neplatné vstupy (např. záporná čísla nebo nečíselné hodnoty).
-* Porovnejte efektivitu faktoriálu vypočítaného pomocí smyčky a pomocí rekurze pro větší čísla (např. 500). Knihovna time.
 * Napište funkce pro výpočet kombinatorických pravidel a vzorců - čistě jako procvičování kombinatoriky... využijte klidně Google
 ** Google, GPT: Optimalizujte rekurzivní verzi faktoriálu pomocí memoizace (ukládání výsledků).
 ** Google, GPT: Implementujte přibližný výpočet faktoriálu pomocí Stirlingova vzorce. Oveřte přesnost výpočtů.
@@ -11,19 +7,19 @@
 
 import os
 import time
-import math
-
-# import matplotlib.pyplot as plt       # pip install matplotlib
 from iridis import print_title, print_error
 
-# Globální konstanty a proměnné
-MEMO = {}  # list pro ukládání mezivýsledků, spočítaných faktoriálů, memoizace
-
-
-##############################################################
-### Faktoriál pomocí for cyklu, vypočet iterací
-# Funkce factorial
 def factorial(num: int) -> int:
+    """
+    Computes the factorial of a given number using an iterative approach.
+
+    The factorial of a number 'n' is the product of all positive integers less than or equal to 'n'.
+    It is defined as: n! = n * (n-1) * (n-2) * ... * 1.
+
+    :param num: A non-negative integer for which the factorial is to be calculated.
+    :return: The factorial of the given number.
+    :raises ValueError: If 'num' is a negative integer.
+    """
     if num == 0:
         return 1
 
@@ -34,24 +30,33 @@ def factorial(num: int) -> int:
     return result_num
 
 
-##############################################################
-### Faktoriál pomocí rekurze
-# Funkce factorial_recursive
-
-
 def factorial_recursive(num: int) -> int:
+    """
+    Computes the factorial of a given number using a recursive approach.
+
+    The factorial of a number 'n' is the product of all positive integers less than or equal to 'n'.
+    It is defined as: n! = n * (n-1) * (n-2) * ... * 1.
+
+    :param num: A non-negative integer for which the factorial is to be calculated.
+    :return: The factorial of the given number.
+    :raises ValueError: If 'num' is less than 1.
+    """
     if num == 1:
         return num
 
     return num * factorial_recursive(num - 1)
 
 
-##############################################################
-### Faktoriál s ošetřením vstupu
-# Funkce factorial_safe_input
-
-
 def factorial_safe_input(num: any) -> int:
+    """
+    Validates the input and computes the factorial of a number.
+
+    Ensures that the input is an integer and non-negative before calculating the factorial.
+
+    :param num: The input value to be validated and used to compute the factorial.
+    :return: The factorial of the validated number.
+    :raises ValueError: If 'num' is not an integer or is negative.
+    """
     if not isinstance(num, int):
         raise ValueError("Input must be an integer.")
     if num < 0:
@@ -60,12 +65,14 @@ def factorial_safe_input(num: any) -> int:
     return factorial(num)
 
 
-##############################################################
-### Časová náročnost - srovnání for cyklu a rekurze, případně knihovny math
-# Funkce faktorial_time_consuming
-
-
 def factorial_benchmark(num: int) -> None:
+    """
+    Benchmarks the performance of factorial calculations using both iterative and recursive methods.
+
+    The function measures and compares the execution time for calculating the factorial using both methods.
+
+    :param num: The integer for which the factorial is calculated and benchmarked.
+    """
     print(f"[*] Testovací hodnota faktoriálu je: {num}!\n")
 
     print_title("[*] Faktoriál pomocí iterace:")
@@ -91,26 +98,6 @@ def factorial_benchmark(num: int) -> None:
     print_title(f"\n[*] Výsledky benchmarku:")
     print(f"- Iterativní výpočet trval {iteration_time:.6f} sekund")
     print(f"- Rekurzivní výpočet trval {recursive_time:.6f} sekund")
-
-
-##############################################################
-### Kombinatorika
-# např. funkce permutation, combination, permutation, variation
-
-
-##############################################################
-### Memoizace neboli ukládání mezivýsledků a snížení počtu opakovaných výpočtů
-# funkce factorial_memo
-
-
-##############################################################
-### Přibližný výpočet faktoriálu (Stirlingův vzorec) + ** grafické znázornění přesnosti vzorce
-# funkce stirling_approximation, compare_factorial_and_stirling
-
-
-##############################################################
-### Časová náročnost a její zobrazení
-# funcke time_consumption, graph_time_consumption
 
 
 ##############################################################
@@ -146,6 +133,5 @@ if __name__ == "__main__":
     print("------------------------------------------------")
 
     # srovnání časové náročnosti různých metod
-    factorial_benchmark(939)
+    factorial_benchmark(955)
     print("------------------------------------------------")
-    
