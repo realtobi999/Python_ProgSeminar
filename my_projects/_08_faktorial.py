@@ -9,6 +9,7 @@ import os
 import time
 from iridis import print_title, print_error
 
+
 def factorial(num: int) -> int:
     """
     Computes the factorial of a given number using an iterative approach.
