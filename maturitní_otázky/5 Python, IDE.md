@@ -182,16 +182,16 @@
 ### **Trh práce a kariéra Python Developera**
 
 - **Proč se stát Python Developerem?**  
-- Python patří mezi 3 nejžádanější jazyky na světě (zdroj: StackOverflow 2020).  
-- **Nabízí širokou škálu kariérních možností:**  
-  - **Backend Developer**  
-    - Vytváří, spravuje a optimalizuje serverovou logiku, databáze a API, které podporují funkčnost aplikací.  
-  - **Datový analytik**  
-    - Sbírá, zpracovává a interpretuje data s cílem odhalit užitečné informace, identifikovat trendy a podpořit firemní rozhodování.  
-  - **AI inženýr**  
-    - Navrhuje, vyvíjí a implementuje algoritmy a modely umělé inteligence, které řeší komplexní problémy nebo automatizují procesy.  
-  - **Testovací inženýr**  
-    - Navrhuje, provádí a automatizuje testy softwaru nebo hardwaru, identifikuje chyby a zajišťuje, že produkty splňují požadovanou kvalitu a funkčnost.  
+  - Python patří mezi 3 nejžádanější jazyky na světě (zdroj: StackOverflow 2020).  
+  - **Nabízí širokou škálu kariérních možností:**  
+    - **Backend Developer**  
+      - Vytváří, spravuje a optimalizuje serverovou logiku, databáze a API, které podporují funkčnost aplikací.  
+    - **Datový analytik**  
+      - Sbírá, zpracovává a interpretuje data s cílem odhalit užitečné informace, identifikovat trendy a podpořit firemní rozhodování.  
+    - **AI inženýr**  
+      - Navrhuje, vyvíjí a implementuje algoritmy a modely umělé inteligence, které řeší komplexní problémy nebo automatizují procesy.  
+    - **Testovací inženýr**  
+      - Navrhuje, provádí a automatizuje testy softwaru nebo hardwaru, identifikuje chyby a zajišťuje, že produkty splňují požadovanou kvalitu a funkčnost.  
 - Je to jedna z nejlehčích cest jak se dostat do světa programování a dostat první zaměstnání.
 
 ## **Machine Learning, AI**
