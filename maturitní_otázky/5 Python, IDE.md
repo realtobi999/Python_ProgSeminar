@@ -8,13 +8,13 @@
 - **Interpretovaný**: Pythonový kód je přímo vykonáván interpretem a není nutné jej před spuštěním kompilovat do strojového kódu, jak tomu bývá u kompilovaných jazyků.  
 - **Skriptovací**: Python je ideální pro psaní skriptů, tedy krátkých programů používaných k automatizaci úkolů nebo řízení jiných aplikací.  
 - **Open source**: Zdrojový kód Pythonu je volně dostupný, což umožňuje jeho bezplatné využití, úpravy a sdílení s komunitou.  
-- **Dynamicky typovaný**: Není potřeba explicitně deklarovat datový typ proměnných – interpret Pythonu jej automaticky určí během běhu programu. Staticky typované jazyky, vyžadují přesně deklarovat typ proměnných.
-- **Dostupnost:** Python je multiplatformní a lze jej používat na Unixu, Windows, MacOS i Linuxu.  
+- **Dynamicky typovaný**: Není potřeba explicitně deklarovat datový typ proměnných – interpret Pythonu jej automaticky určí během běhu programu. Staticky typované jazyky vyžadují přesně deklarovat typ proměnných.
+- **Dostupnost:** Python je multiplatformní a lze jej používat na Unixu, Windows, macOS i Linuxu.  
 - **Hybridní**: Python podporuje různé programovací styly:  
   - **Objektově orientované programování (OOP)**: Pracuje s objekty, které obsahují data (atributy) a metody (funkce).  
   - **Imperativní programování**: Program se skládá z postupně vykonávaných příkazů.  
   - **Funkcionální programování**: Zdůrazňuje práci s funkcemi a minimalizuje sdílený stav.  
-- **Tvůrce:** Guido van Rossum, 1991\.
+- **Tvůrce:** Guido van Rossum, 1991.
 
 ## **Porovnání s ostatními jazyky**
 
@@ -48,7 +48,7 @@
 - **Jednoduchost a snadné učení:**  
   - Python má intuitivní syntaxi, která z něj činí ideální jazyk pro začátečníky. Rozsáhlá dokumentace a aktivní komunita dále usnadňují učení a řešení problémů.  
 - **Všestrannost:**  
-  - Python podporuje různé programovací paradigma, což vývojářům umožňuje použít přístup, který nejlépe odpovídá jejich potřebám.  
+  - Python podporuje různé programovací paradigmata, což vývojářům umožňuje použít přístup, který nejlépe odpovídá jejich potřebám.  
 - **Čitelnost:**  
   - Kód v Pythonu je jasně strukturovaný díky použití odsazení namísto složených závorek, což zjednodušuje spolupráci i údržbu.
 
@@ -74,10 +74,10 @@
 
 ## **Knihovny**
 
-- Je to **sbírka předkompilovaných kódů,** které lze později použít v programu pro některé specifické dobře definované operace  
+- Je to **sbírka předkompilovaných kódů,** které lze později použít v programu pro některé specifické dobře definované operace.  
 - Když propojíme knihovnu s naším programem a spustíme tento program, linker tuto knihovnu automaticky vyhledá. Extrahuje funkce této knihovny a podle toho interpretuje program. V našem programu tak používáme metody knihovny.  
 - Místo toho, abychom používali stejný kód v různých programech a dělali kód složitým, **definujeme nejčastěji používané funkce v modulech a můžeme je jednoduše importovat do programu.**
-- *Ukázka práce s knihovnama:*
+- *Ukázka práce s knihovnami:*
 
   ```python
   # Import knihoven
