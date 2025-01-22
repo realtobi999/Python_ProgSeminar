@@ -17,9 +17,9 @@
 
 import os
 import time
-from bitarray import bitarray
 import math
 import iridis
+from bitarray import bitarray
 
 
 def is_prime(num: int) -> bool:
