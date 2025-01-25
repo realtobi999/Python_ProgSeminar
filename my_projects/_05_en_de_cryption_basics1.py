@@ -4,6 +4,7 @@ from iridis import print_title
 ENG_ALPHABET = "aábcčdďeéěfghiíjklmnňoópqrřsštťuúůvwxyýzž.!,AÁBCČDĎEÉĚFGHIÍJKLMNŇOÓPQRŘSŠTŤUÚŮVWXYÝZŽ"
 # Anglická abeceda s českými znaky
 
+
 def caesar_cipher_encrypt(text: str, shift: int, alphabet: str) -> str:
     """
     Encrypts a given text using Caesar cipher by shifting characters in the alphabet.
@@ -67,7 +68,11 @@ if __name__ == "__main__":
 
     print_title("[*] 05 - Encryption/Decryption - Basics 01\n")
 
-    encrypted_text = caesar_cipher_encrypt("Tečna je přímka, která má s křivkou společný jeden bod a vzdálenost křivky od přímky klesá při přibližování se k bodu dotyku rychleji než lineárně!", 2, ENG_ALPHABET)
+    encrypted_text = caesar_cipher_encrypt(
+        "Tečna je přímka, která má s křivkou společný jeden bod a vzdálenost křivky od přímky klesá při přibližování se k bodu dotyku rychleji než lineárně!",
+        2,
+        ENG_ALPHABET,
+    )
     print_title(f"[*] Encrypted: ")
     print(encrypted_text)
 

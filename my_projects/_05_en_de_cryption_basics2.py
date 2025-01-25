@@ -1,6 +1,6 @@
 import os
 from _05_en_de_cryption_basics1 import caesar_cipher_decrypt
-from iridis import print_title 
+from iridis import print_title
 
 # Globální konstanty a proměnné
 MY_ALPHABET = "aábcčdďeéěfghijklmnňoópqrřsštťuůúvwxyzž0123456789.,-+?!AÁBCČDĎEÉĚFGHIJKLMNŇOÓPQRŘSŠTŤUŮÚVWXYZŽ"

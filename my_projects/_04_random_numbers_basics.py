@@ -124,9 +124,7 @@ if __name__ == "__main__":
 
     if difficulty == "2":
         print("[*] Kolik chcete čísel v příkladě? (min. 3)")
-        amount_of_numbers = int(
-            get_number_from_user(input_text="=> ", conditions=[lambda n: n > 2])
-        )
+        amount_of_numbers = int(get_number_from_user(input_text="=> ", conditions=[lambda n: n > 2]))
         print()
 
     while True:

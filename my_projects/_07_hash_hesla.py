@@ -69,9 +69,7 @@ if __name__ == "__main__":
     print("[*] Login - 2 ")
 
     print("\n[*] What would you like to do?")
-    user_choice = get_number_from_user(
-        input_text="=> ", conditions=[lambda n: n == 1 or n == 2]
-    )
+    user_choice = get_number_from_user(input_text="=> ", conditions=[lambda n: n == 1 or n == 2])
 
     if user_choice == 1:
         register_user()

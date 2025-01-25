@@ -28,15 +28,9 @@ def get_triangle_from_user() -> Triangle:
 
     triangle_sides = []
 
-    triangle_sides.append(
-        get_number_from_user("[*] Zadej první stranu: ", conditions=[lambda n: n > 0])
-    )
-    triangle_sides.append(
-        get_number_from_user("[*] Zadej druhou stranu: ", conditions=[lambda n: n > 0])
-    )
-    triangle_sides.append(
-        get_number_from_user("[*] Zadej třetí stranu: ", conditions=[lambda n: n > 0])
-    )
+    triangle_sides.append(get_number_from_user("[*] Zadej první stranu: ", conditions=[lambda n: n > 0]))
+    triangle_sides.append(get_number_from_user("[*] Zadej druhou stranu: ", conditions=[lambda n: n > 0]))
+    triangle_sides.append(get_number_from_user("[*] Zadej třetí stranu: ", conditions=[lambda n: n > 0]))
 
     triangle_sides.sort(reverse=True)
 
@@ -58,9 +52,7 @@ def is_valid_triangle(triangle: Triangle) -> bool:
     """
 
     if triangle.side_a <= 0 or triangle.side_b <= 0 or triangle.side_c <= 0:
-        print_error(
-            "ERROR! Not a valid triangle due to side lengths: side lengths cannot be less than or zero."
-        )
+        print_error("ERROR! Not a valid triangle due to side lengths: side lengths cannot be less than or zero.")
         return False
 
     if (
@@ -84,16 +76,10 @@ def calculate_triangle_angles(triangle: Triangle) -> Triangle:
 
     # Using cosine rule to calculate the angles
     triangle.a_angle = math.degrees(
-        math.acos(
-            (triangle.side_b**2 + triangle.side_c**2 - triangle.side_a**2)
-            / (2 * triangle.side_b * triangle.side_c)
-        )
+        math.acos((triangle.side_b**2 + triangle.side_c**2 - triangle.side_a**2) / (2 * triangle.side_b * triangle.side_c))
     )
     triangle.b_angle = math.degrees(
-        math.acos(
-            (triangle.side_a**2 + triangle.side_c**2 - triangle.side_b**2)
-            / (2 * triangle.side_a * triangle.side_c)
-        )
+        math.acos((triangle.side_a**2 + triangle.side_c**2 - triangle.side_b**2) / (2 * triangle.side_a * triangle.side_c))
     )
     triangle.c_angle = 180 - (triangle.a_angle + triangle.b_angle)
 
@@ -111,9 +97,7 @@ def display_triangle_properties(triangle: Triangle) -> None:
     s = circumference / 2
 
     # calculate area: √s(s−a)(s−b)(s−c) where s: (a + b + c)/2
-    area = math.sqrt(
-        s * (s - triangle.side_a) * (s - triangle.side_b) * (s - triangle.side_c)
-    )
+    area = math.sqrt(s * (s - triangle.side_a) * (s - triangle.side_b) * (s - triangle.side_c))
 
     # calculate circumradius: abc/4S where S: area of the triangle
     circumscribe_r = (triangle.side_a * triangle.side_b * triangle.side_c) / (4 * area)
@@ -140,11 +124,7 @@ def display_triangle_type(triangle: Triangle) -> None:
     # determine triangle type based on side lengths
     if triangle.side_a == triangle.side_b == triangle.side_c:
         type_based_on_lengths = "Rovnostranný"
-    elif (
-        triangle.side_a == triangle.side_b
-        or triangle.side_a == triangle.side_c
-        or triangle.side_b == triangle.side_c
-    ):
+    elif triangle.side_a == triangle.side_b or triangle.side_a == triangle.side_c or triangle.side_b == triangle.side_c:
         type_based_on_lengths = "Rovnoramenný"
     else:
         type_based_on_lengths = "Různostranný"
@@ -169,9 +149,7 @@ def main():
             triangle = get_triangle_from_user()  # get triangle lengths from user
 
             if is_valid_triangle(triangle):  # validate the triangle
-                calculate_triangle_angles(
-                    triangle
-                )  # calculate the angles of the triangle
+                calculate_triangle_angles(triangle)  # calculate the angles of the triangle
                 break
 
         # display properties and triangle type

@@ -20,9 +20,7 @@ print_title("1. Úkol: Základní aritmetické operace")
 
 # Načtení čísel
 number_1 = get_number_from_user(input_text="Vložte první číslo: ")
-number_2 = get_number_from_user(
-    input_text="Vložte druhé číslo: ", conditions=[lambda n: n != 0]
-)
+number_2 = get_number_from_user(input_text="Vložte druhé číslo: ", conditions=[lambda n: n != 0])
 
 # a) Sčítání
 print(f"Součet: {number_1 + number_2}")
@@ -109,9 +107,7 @@ person = {}
 
 # b) Načtení údajů od uživatele
 name = input("Jméno: ")
-age = get_number_from_user(
-    input_text="Věk: ", error_message="Neplatný věk!", conditions=[lambda n: n >= 0]
-)
+age = get_number_from_user(input_text="Věk: ", error_message="Neplatný věk!", conditions=[lambda n: n >= 0])
 city = input("Město: ")
 
 # Přidání údajů do slovníku
@@ -120,9 +116,7 @@ person["age"] = age
 person["city"] = city
 
 # c) Výpis slovníku
-print(
-    f"Osoba:\tJméno: {person['name']}\n\tVěk: {person['age']}\n\tMěsto: {person['city']}"
-)
+print(f"Osoba:\tJméno: {person['name']}\n\tVěk: {person['age']}\n\tMěsto: {person['city']}")
 
 ##############################################################
 # 7. Úkol: Použití f-string
@@ -229,11 +223,7 @@ my_tuple = (1, 2, 3, 2, 4, 2, 5)
 number_to_count = int(get_number_from_user(input_text="Zadejte prvek: "))
 print(f"Prvek se objevuje v tuplu: {my_tuple.count(number_to_count)}x")
 # b) Použití metody index()
-number_to_index = int(
-    get_number_from_user(
-        input_text="Zadejte prvek: ", conditions=[lambda n: n >= 1 and n <= 5]
-    )
-)
+number_to_index = int(get_number_from_user(input_text="Zadejte prvek: ", conditions=[lambda n: n >= 1 and n <= 5]))
 print(f"Index tohoto prvku v tuplu: {my_tuple.index(number_to_index)}")
 
 ##############################################################

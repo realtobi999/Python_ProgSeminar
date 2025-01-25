@@ -113,9 +113,7 @@ class QuadraticEquation:
 
         # if complex roots exist, factorization is not possible
         if any(isinstance(root, complex) for root in solutions):
-            raise ValueError(
-                "Rozklad kvadratické rovnice s komplexními kořeny není možný."
-            )
+            raise ValueError("Rozklad kvadratické rovnice s komplexními kořeny není možný.")
 
         if len(solutions) == 1:
             solutions.append(solutions[0])
@@ -155,9 +153,7 @@ if __name__ == "__main__":
     os.system("clear")
     iridis.print_rainbow("[*] - 09 Kvadratické rovnice\n")
 
-    a = iridis.get_number_from_user(
-        input_text="[*] Zadejte koeficient a: ", conditions=[lambda n: n != 0]
-    )
+    a = iridis.get_number_from_user(input_text="[*] Zadejte koeficient a: ", conditions=[lambda n: n != 0])
     b = iridis.get_number_from_user(input_text="[*] Zadejte koeficient b: ")
     c = iridis.get_number_from_user(input_text="[*] Zadejte koeficient c: ")
 

@@ -22,9 +22,7 @@ def calculate_and_save(first_number, second_number):
         multiplication = first_number * second_number
         division = first_number / second_number
 
-        result_label.config(
-            text=f"Addition: {addition} Subtraction: {subtraction}\nMultiplication: {multiplication} Division: {division}"
-        )
+        result_label.config(text=f"Addition: {addition} Subtraction: {subtraction}\nMultiplication: {multiplication} Division: {division}")
 
         rows = [
             first_number,

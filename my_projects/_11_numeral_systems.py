@@ -3,6 +3,7 @@ import sys
 import traceback
 from iridis import *
 
+
 def decimal_to_binary(d_num: int) -> str:
     """
     Converts a decimal number to its binary representation.
@@ -45,7 +46,7 @@ def decimal_to_base(d_num: int, base: int) -> str:
     """
     Converts a decimal number to a specified base.
 
-    Supports bases greater than or equal to 2. For bases greater than 10, 
+    Supports bases greater than or equal to 2. For bases greater than 10,
     it uses letters A-Z to represent values above 9.
 
     :param d_num: The decimal number to convert.
